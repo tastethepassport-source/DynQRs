@@ -11,13 +11,14 @@
       position: fixed;
       inset: 0;
       background: #385245;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 60px 0 80px 0;
-      box-sizing: border-box;
+      display: grid;
+      grid-template-rows: auto 1fr;
       z-index: 9999;
+    }
+    .logo-area {
+      padding-top: 60px;
+      display: flex;
+      justify-content: center;
     }
     .logo-img {
       width: 200px;
@@ -27,6 +28,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 28px;
     }
     .star-spinner {
@@ -37,10 +39,10 @@
     }
     .loading-text {
       color: #ffffff;
-      font-size: 17px;
+      font-size: 22px;
       font-family: sans-serif;
       margin: 0;
-      opacity: 0.85;
+      opacity: 0.9;
       letter-spacing: 0.04em;
     }
     .dots::after {
@@ -63,7 +65,9 @@
 <body>
 
   <div class="loading-screen" id="loadingScreen">
-    <img class="logo-img" src="https://cdn.shopify.com/s/files/1/0901/7304/7049/files/LOGO_PANTALLA_CARGA.png?v=1777032492" alt="Logo"/>
+    <div class="logo-area">
+      <img class="logo-img" src="https://cdn.shopify.com/s/files/1/0901/7304/7049/files/LOGO_PANTALLA_CARGA.png?v=1777032492" alt="Logo"/>
+    </div>
     <div class="spinner-wrap">
       <svg class="star-spinner" id="starSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <polygon id="starPoly" fill="#f2af3c"/>
