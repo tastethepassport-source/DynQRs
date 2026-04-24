@@ -7,25 +7,17 @@
     .loading-screen {
       position: fixed;
       inset: 0;
-      background: #16412b;
+      background: #385245;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
       z-index: 9999;
     }
     .star-spinner {
-      width: 80px;
-      height: 80px;
+      width: 140px;
+      height: 140px;
       animation: spin 1.4s linear infinite;
       transform-origin: 50% 50%;
-    }
-    .loading-text {
-      color: #ffffff;
-      font-size: 16px;
-      margin: 0;
-      opacity: 0.9;
     }
     @keyframes spin {
       from { transform: rotate(0deg); }
@@ -39,7 +31,6 @@
     <svg class="star-spinner" id="starSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <polygon id="starPoly" fill="#f2af3c"/>
     </svg>
-    <p class="loading-text">Cargando...</p>
   </div>
 
   <script>
