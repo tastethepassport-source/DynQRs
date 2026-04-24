@@ -4,63 +4,73 @@
   <meta charset="utf-8">
   <title></title>
   <style>
-     .loading-screen {
-  position: fixed;
-  inset: 0;
-  background: #16412b;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  z-index: 9999;
-}
-
-.star-spinner {
-  width: 80px;
-  height: 80px;
-  animation: spin 1.4s linear infinite;
-  transform-origin: 50% 50%;
-}
-
-.loading-text {
-  color: #ffffff;
-  font-size: 16px;
-  margin: 0;
-  opacity: 0.9;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
+    .loading-screen {
+      position: fixed;
+      inset: 0;
+      background: #16412b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      z-index: 9999;
+    }
+    .star-spinner {
+      width: 80px;
+      height: 80px;
+      animation: spin 1.4s linear infinite;
+      transform-origin: 50% 50%;
+    }
+    .loading-text {
+      color: #ffffff;
+      font-size: 16px;
+      margin: 0;
+      opacity: 0.9;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
+
+  <div class="loading-screen" id="loadingScreen">
+    <svg class="star-spinner" id="starSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <polygon id="starPoly" fill="#f2af3c"/>
+    </svg>
+    <p class="loading-text">Cargando...</p>
+  </div>
+
   <script>
+    (function() {
+      const cx = 50, cy = 50, outerR = 45, innerR = 19, points = 5;
+      const pts = [];
+      for (let i = 0; i < points * 2; i++) {
+        const angle = (Math.PI / points) * i - Math.PI / 2;
+        const r = i % 2 === 0 ? outerR : innerR;
+        pts.push((cx + r * Math.cos(angle)).toFixed(3) + ',' + (cy + r * Math.sin(angle)).toFixed(3));
+      }
+      document.getElementById('starPoly').setAttribute('points', pts.join(' '));
+    })();
+
     const AS_URL_BASE = "https://script.google.com/macros/s/AKfycbwMIIfAmuavM2wzMEHbBs3Mqo9H2QVEv5DDs7FTYO6alcBDkxxT23EllLHEOeADInfvuw/exec";
-    
+
     var url = document.location.href;
     var k = url.substr(url.lastIndexOf("k=")+2);
-    
-    if(k){
-      fetch(AS_URL_BASE+'?k='+k)
-      .then(r => r.text())
-      .then((r) => {
-        console.log(r);
-        //document.write(r);
-        if(r){
-          document.location.replace(r);
-        }
-      })
-      .catch(err => console.log(err))
-    }
 
+    if (k) {
+      fetch(AS_URL_BASE + '?k=' + k)
+        .then(r => r.text())
+        .then((r) => {
+          console.log(r);
+          if (r) {
+            document.location.replace(r);
+          }
+        })
+        .catch(err => console.log(err));
+    }
   </script>
-  
-  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-  
-  
+
 </body>
 </html>
